@@ -1,0 +1,141 @@
+<div class="container-fluid mt-3 mb-4">
+  <h2 style="color: #673ab7">Dashboard</h2>
+  <hr />
+  <div class="row">
+    <div class="col-md">
+      <div class="card" id="dashboard-card">
+        <h3 class="m-3" style="color: #673ab7">Shortcuts</h3>
+        <div class="card-body">
+          <div class="row">
+            <div class="col d-flex justify-content-center mb-md-0 mb-2">
+              <div class="card" style="width: 15rem">
+                <img
+                  src="../../assets/bills.png"
+                  class="card-img-top"
+                  alt="..."
+                />
+                <div class="card-body">
+                  <h3 style="color: #673ab7" class="card-title">Bills</h3>
+                  <p class="card-text">
+                    View all your bills or generate new bills
+                  </p>
+                </div>
+                <div class="card-body">
+                  <a
+                    mat-flat-button
+                    color="primary"
+                    href="/bill"
+                    style="width: 100%"
+                  >
+                    More
+                  </a>
+                </div>
+              </div>
+            </div>
+            <div class="col d-flex justify-content-center mb-md-0 mb-2">
+              <div class="card" style="width: 15rem">
+                <img
+                  src="../../assets/customers.png"
+                  class="card-img-top"
+                  alt="..."
+                />
+                <div class="card-body">
+                  <h3 style="color: #673ab7" class="card-title">Customers</h3>
+                  <p class="card-text">
+                    View all your customers or add new customer
+                  </p>
+                </div>
+                <div class="card-body">
+                  <a
+                    mat-flat-button
+                    color="primary"
+                    href="/customers"
+                    style="width: 100%"
+                  >
+                    More
+                  </a>
+                </div>
+              </div>
+            </div>
+            <div class="col d-flex justify-content-center mb-md-0 mb-2">
+              <div class="card" style="width: 15rem">
+                <img
+                  src="../../assets/product.png"
+                  class="card-img-top"
+                  alt="..."
+                />
+                <div class="card-body">
+                  <h3 style="color: #673ab7" class="card-title">Products</h3>
+                  <p class="card-text">
+                    View all your products or add new product
+                  </p>
+                </div>
+                <div class="card-body">
+                  <a
+                    mat-flat-button
+                    color="primary"
+                    href="/products"
+                    style="width: 100%"
+                  >
+                    More
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4 mt-md-0 mt-3">
+      <div class="card" id="dashboard-card">
+        <h3 class="m-3" style="color: #673ab7">Analytics</h3>
+        <div class="card-body">
+          <table class="table-light w-100">
+            <tbody>
+              <tr>
+                <td>
+                  <h4>Number of customers</h4>
+                </td>
+                <td class="text-end" style="color: #673ab7">
+                  <h4>{{ customerCount }}</h4>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <h4>Number of Bills</h4>
+                </td>
+                <td class="text-end" style="color: #673ab7">
+                  <h4>{{ billsCount }}</h4>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <h4>Number of Products</h4>
+                </td>
+                <td class="text-end" style="color: #673ab7">
+                  <h4>{{ productsCount }}</h4>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="card mt-3 mt-md-4" id="dashboard-card">
+        <h3 class="m-3" style="color: #673ab7">About us</h3>
+        <div class="card-body">
+          <h5>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Laudantium
+            aliquid aperiam amet et deserunt inventore corporis qui
+            exercitationem fugiat illo reprehenderit beatae iste voluptate
+            soluta, itaque, quia delectus architecto sunt possimus nostrum fugit
+            nobis eum at sed? Vero adipisci, molestias obcaecati ducimus sint
+            eaque, est natus distinctio deleniti beatae ut hic culpa
+            necessitatibus? Iure, expedita odit vel incidunt quod sed assumenda
+            necessitatibus sequi est aspernatur. Dolore eveniet omnis debitis
+            veritatis!
+          </h5>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,1 +1,68 @@
+// Custom Theming for Angular Material
+// For more information: https://material.angular.io/guide/theming
+@use "@angular/material" as mat;
+// Plus imports for other components in your app.
+
+// Include the common styles for Angular Material. We include this here so that you only
+// have to load a single css file for Angular Material in your app.
+// Be sure that you only ever include this mixin once!
+@include mat.core();
+
+// Define the palettes for your theme using the Material Design palettes available in palette.scss
+// (imported above). For each palette, you can optionally specify a default, lighter, and darker
+// hue. Available color palettes: https://material.io/design/color/
+$billing-application-primary: mat.define-palette(mat.$deep-purple-palette);
+$billing-application-accent: mat.define-palette(
+  mat.$red-palette,
+  A200,
+  A100,
+  A400
+);
+
+// The warn palette is optional (defaults to red).
+$billing-application-warn: mat.define-palette(mat.$red-palette);
+
+// Create the theme object. A theme consists of configurations for individual
+// theming systems such as "color" or "typography".
+$billing-application-theme: mat.define-light-theme(
+  (
+    color: (
+      primary: $billing-application-primary,
+      accent: $billing-application-accent,
+      warn: $billing-application-warn,
+    ),
+  )
+);
+
+// Include theme styles for core and each component used in your app.
+// Alternatively, you can import and @include the theme mixins for each component
+// that you are using.
+@include mat.all-component-themes($billing-application-theme);
+
 /* You can add global styles to this file, and also import other style files */
+
+$my-custom-level: mat.define-typography-config(
+  $font-family: "Montserrat",
+  $headline: mat.define-typography-level(2rem, 27px, 500),
+  $title: mat.define-typography-level(1.6rem, 16px, 500),
+  $display-4:
+    mat.define-typography-level(112px, 112px, 300, $letter-spacing: -0.05em),
+  $display-3:
+    mat.define-typography-level(56px, 56px, 400, $letter-spacing: -0.02em),
+  $display-2:
+    mat.define-typography-level(8px, 8px, 500, $letter-spacing: -0.005em),
+  $display-1: mat.define-typography-level(34px, 40px, 400),
+  $subheading-2: mat.define-typography-level(22px, 20px, 500),
+  $subheading-1: mat.define-typography-level(16px, 20px, 400),
+);
+
+@include mat.core($my-custom-level);
+
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: "Montserrat", sans-serif;
+}

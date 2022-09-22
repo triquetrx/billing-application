@@ -1,0 +1,153 @@
+<div class="container-fluid h-100 mt-2">
+  <div class="row">
+    <div class="col-md mt-3 ms-2">
+      <h2 class="text-secondary">
+        <span style="color: #673ab7">Products</span> List
+      </h2>
+    </div>
+    <div class="col-md-4">
+      <mat-form-field appearance="outline" style="width: 95%">
+        <mat-label>Search Products</mat-label>
+        <input matInput placeholder="Product Detail" [(ngModel)]="searchText" />
+        <button mat-button matSuffix mat-icon-button>
+          <mat-icon>search</mat-icon>
+        </button>
+      </mat-form-field>
+    </div>
+  </div>
+  <div
+    class="result"
+    *ngIf="(productsList | filter: searchText).length > 0; else noResults"
+  >
+    <div
+      class="products d-flex justify-content-center"
+      *ngFor="let product of productsList | filter: searchText; let index"
+    >
+      <div class="card mb-3" style="width: 94%">
+        <div class="card-body">
+          <div class="row">
+            <div class="col">
+              <h3
+                class="card-title"
+                style="margin-bottom: 0.4rem; color: #673ab7"
+              >
+                {{ product.id }}: {{ product.productName }}
+              </h3>
+              <h4 class="card-subtitle mb-2 text-muted">
+                HSN Code: {{ product.hsn }}
+              </h4>
+            </div>
+            <div class="col-4 text-end">
+              <h4 style="margin-bottom: 0">Basic: {{ product.basic }}</h4>
+              <h4 style="margin-bottom: 0">GST: {{ product.gst }}%</h4>
+              <h4 style="color: #673ab7; font-size: large">
+                Total Price: ₹ {{ product.total }}
+              </h4>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <ng-template #noResults>
+    <p class="d-flex justify-content-center lead">
+      No results found for "{{ searchText }}".
+    </p>
+  </ng-template>
+  <form
+    #product="ngForm"
+    (submit)="newProduct(product.value)"
+    id="fab-form"
+    *ngIf="isFormOpen"
+    method="post"
+  >
+    <div class="alert alert-{{ alertType }}" *ngIf="isAlert" role="alert">
+      {{ alertMessage }}
+    </div>
+    <mat-form-field appearance="outline" style="width: 100%">
+      <mat-label>Product Name</mat-label>
+      <input
+        matInput
+        placeholder="Product Name"
+        name="productName"
+        #productName="ngModel"
+        required
+        ngModel
+      />
+    </mat-form-field>
+    <mat-form-field appearance="outline" style="width: 100%">
+      <mat-label>Product Type</mat-label>
+      <input
+        matInput
+        placeholder="Product Type"
+        name="productType"
+        #productType="ngModel"
+        required
+        ngModel
+      />
+    </mat-form-field>
+    <mat-form-field appearance="outline" style="width: 100%">
+      <mat-label>HSN Code</mat-label>
+      <input
+        matInput
+        placeholder="HSN Code"
+        name="hsnCode"
+        #hsnCode="ngModel"
+        required
+        ngModel
+      />
+    </mat-form-field>
+    <div class="row mb-3">
+      <div class="col">
+        <mat-form-field appearance="outline" style="width: 100%">
+          <mat-label>GST rate</mat-label>
+          <input
+            matInput
+            type="number"
+            min="0"
+            step="0.01"
+            placeholder="GST rate"
+            name="gstRate"
+            #gstRate="ngModel"
+            required
+            ngModel
+          />
+          <mat-hint>Example: for 14% enter 14</mat-hint>
+        </mat-form-field>
+      </div>
+      <div class="col">
+        <mat-form-field appearance="outline" style="width: 100%">
+          <mat-label>Basic Price</mat-label>
+          <input
+            matInput
+            type="number"
+            min="100"
+            placeholder="Basic Price"
+            name="basic"
+            #basic="ngModel"
+            required
+            ngModel
+          />
+          <mat-hint>Excluding GST</mat-hint>
+        </mat-form-field>
+      </div>
+    </div>
+    <button
+      style="width: 100%; margin-bottom: 1rem; margin-top: 1rem"
+      mat-flat-button
+      color="primary"
+    >
+      Add
+    </button>
+  </form>
+  <button
+    id="fab"
+    (click)="toggleFormStatus()"
+    mat-fab-bottom-right
+    mat-fab
+    color="primary"
+  >
+    <mat-icon *ngIf="isFormOpen">close</mat-icon>
+    <mat-icon *ngIf="!isFormOpen">add</mat-icon>
+  </button>
+</div>

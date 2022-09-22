@@ -1,0 +1,66 @@
+<div class="container-fluid pb-3 mb-5">
+  <form>
+    <div class="row">
+      <div class="col">
+        <mat-form-field appearance="outline" style="width: 100%">
+          <mat-label>Product Id</mat-label>
+          <input matInput placeholder="Product Id" />
+        </mat-form-field>
+      </div>
+      <div class="col-1 mt-1">
+        <button mat-flat-button color="primary" class="me-1 p-2">
+          <mat-icon>refresh</mat-icon>
+        </button>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md">
+        <mat-form-field appearance="outline" style="width: 100%">
+          <mat-label>Bill to</mat-label>
+          <input matInput placeholder="Bill to" />
+        </mat-form-field>
+      </div>
+      <div class="col-md">
+        <mat-form-field appearance="outline" style="width: 100%">
+          <mat-label>To Address</mat-label>
+          <input matInput placeholder="To Address" />
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <mat-form-field appearance="outline" style="width: 100%">
+          <mat-label>Customer ID</mat-label>
+          <input matInput placeholder="Customer ID" />
+        </mat-form-field>
+      </div>
+      <div class="col-1 mt-1">
+        <button mat-flat-button color="primary" class="me-1 p-2">
+          <mat-icon>refresh</mat-icon>
+        </button>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md">
+        <mat-form-field appearance="outline" style="width: 100%">
+          <mat-label>Product Name</mat-label>
+          <input matInput placeholder="Product Name" />
+        </mat-form-field>
+      </div>
+      <div class="col-md">
+        <mat-form-field appearance="outline" style="width: 100%">
+          <mat-label>Quantity</mat-label>
+          <input type="number" min="1" matInput placeholder="Quantity" />
+        </mat-form-field>
+      </div>
+      <div class="col-md">
+        <mat-form-field appearance="outline" style="width: 100%">
+          <mat-label>HSN Code</mat-label>
+          <input matInput placeholder="HSN Code" />
+        </mat-form-field>
+      </div>
+    </div>
+    <button mat-flat-button color="primary">Generate</button>
+    <button mat-flat-button class="ms-1 bg-danger text-light">Clear</button>
+  </form>
+</div>
