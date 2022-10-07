@@ -10,8 +10,10 @@ a {
   padding-right: 1rem;
   text-decoration: none;
   color: #fff;
+  font-weight: 500;
 }
 
 .active {
   color: #673ab7 !important;
+  transition: 0.3s ease-in;
 }

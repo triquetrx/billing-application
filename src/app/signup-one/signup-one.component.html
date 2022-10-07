@@ -1,0 +1,115 @@
+<div *ngIf="!isNextPage">
+  <div class="mt-4"></div>
+  <div class="row">
+    <div class="col-9">
+      <h2 class="text-secondary mb-2">Create account</h2>
+    </div>
+    <div class="col">
+      <h5
+        class="text-end lead mb-2"
+        style="color: #673ab7; font-size: medium; font-weight: bolder"
+      >
+        1 of 2
+      </h5>
+    </div>
+  </div>
+  <hr />
+  <form method="post" #newAccount="ngForm" (submit)="onNext(newAccount)">
+    <div class="row">
+      <div class="col">
+        <mat-form-field appearance="outline" class="mb-1" style="width: 100%">
+          <mat-label>Contact Person Name</mat-label>
+          <input
+            matInput
+            placeholder="Contact Person Name"
+            name="contactPerson"
+            #contactPerson="ngModel"
+            ngModel
+            required
+          />
+        </mat-form-field>
+      </div>
+      <div class="col">
+        <mat-form-field appearance="outline" class="mb-1" style="width: 100%">
+          <mat-label>Contact Number</mat-label>
+          <input
+            matInput
+            placeholder="Contact Number"
+            name="contactNumber"
+            type="tel"
+            pattern="[0-9]{10}"
+            #contactNumber="ngModel"
+            ngModel
+            required
+          />
+          <mat-error *ngIf="contactNumber.hasError('pattern')">
+            Contact Number must be a valid 10 digit number
+          </mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+    <mat-form-field appearance="outline" class="mb-1" style="width: 100%">
+      <mat-label>Organization Name</mat-label>
+      <input
+        matInput
+        placeholder="Organization Name"
+        name="organizationName"
+        #organizationName="ngModel"
+        ngModel
+        required
+      />
+    </mat-form-field>
+    <div class="row">
+      <div class="col">
+        <mat-form-field appearance="outline" class="mb-1" style="width: 100%">
+          <mat-label>Address Line 1</mat-label>
+          <input
+            matInput
+            placeholder="Address Line 1"
+            name="address1"
+            #address1="ngModel"
+            ngModel
+            required
+          />
+        </mat-form-field>
+      </div>
+      <div class="col">
+        <mat-form-field appearance="outline" class="mb-1" style="width: 100%">
+          <mat-label>Address Line 2</mat-label>
+          <input
+            matInput
+            placeholder="Address Line 2"
+            name="address2"
+            #address2="ngModel"
+            ngModel
+          />
+        </mat-form-field>
+      </div>
+      <div class="col">
+        <mat-form-field appearance="outline" class="mb-1" style="width: 100%">
+          <mat-label>City</mat-label>
+          <input
+            matInput
+            placeholder="City"
+            name="city"
+            #city="ngModel"
+            ngModel
+            required
+          />
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-8">
+        <a href="/login" style="color: #ff5252"> Already have an account ?</a>
+      </div>
+      <div class="col d-flex justify-content-end">
+        <button mat-flat-button color="primary">
+          Next
+          <mat-icon style="height: 26.5px">chevron_right</mat-icon>
+        </button>
+      </div>
+    </div>
+  </form>
+</div>
+<app-signup-two *ngIf="isNextPage"></app-signup-two>

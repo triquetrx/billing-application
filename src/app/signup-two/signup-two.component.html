@@ -1,0 +1,122 @@
+<div class="mt-4"></div>
+<div *ngIf="!isAccountCreated">
+  <div *ngIf="isAlert" class="alert alert-{{ alertType }}" role="alert">
+    {{ alertMessage }}
+  </div>
+  <div class="row">
+    <div class="col-9">
+      <h2 class="text-secondary mb-2">Create account</h2>
+    </div>
+    <div class="col">
+      <h5
+        class="text-end lead mb-2"
+        style="color: #673ab7; font-size: medium; font-weight: bolder"
+      >
+        2 of 2
+      </h5>
+    </div>
+  </div>
+  <hr />
+  <form method="post" #newAccount="ngForm" (submit)="onNext(newAccount)">
+    <div class="row">
+      <div class="col">
+        <mat-form-field appearance="outline" class="mb-1" style="width: 100%">
+          <mat-label>Email ID</mat-label>
+          <input
+            matInput
+            placeholder="Email ID"
+            name="emailId"
+            #emailId="ngModel"
+            ngModel
+            required
+          />
+        </mat-form-field>
+      </div>
+      <div class="col">
+        <mat-form-field appearance="outline" class="mb-1" style="width: 100%">
+          <mat-label>Username</mat-label>
+          <input
+            matInput
+            placeholder="Username"
+            name="username"
+            #username="ngModel"
+            ngModel
+            required
+          />
+        </mat-form-field>
+      </div>
+    </div>
+
+    <mat-form-field appearance="outline" class="mb-1" style="width: 100%">
+      <mat-label>GST Number</mat-label>
+      <input
+        matInput
+        placeholder="GST Number"
+        name="gstNumber"
+        #gstNumber="ngModel"
+        ngModel
+        required
+      />
+    </mat-form-field>
+    <div class="row">
+      <div class="col">
+        <mat-form-field appearance="outline" class="mb-1" style="width: 100%">
+          <mat-label>Password</mat-label>
+          <input
+            matInput
+            type="password"
+            placeholder="Password"
+            name="password"
+            #password="ngModel"
+            ngModel
+            required
+          />
+        </mat-form-field>
+      </div>
+      <div class="col">
+        <mat-form-field appearance="outline" class="mb-1" style="width: 100%">
+          <mat-label>Confirm Password</mat-label>
+          <input
+            matInput
+            type="password"
+            placeholder="Confirm Password"
+            name="cPassword"
+            #cPassword="ngModel"
+            ngModel
+            required
+          />
+          <mat-hint
+            class="text-danger"
+            *ngIf="cPassword.touched && cPassword.value !== password.value"
+          >
+            Password not a match
+          </mat-hint>
+        </mat-form-field>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col">
+        <a href="/signup" mat-flat-button color="accent">
+          Reset All <mat-icon style="height: 26.5px">refresh</mat-icon>
+        </a>
+      </div>
+      <div class="col d-flex justify-content-end">
+        <button mat-flat-button color="primary">
+          Submit <mat-icon style="height: 26.5px">chevron_right</mat-icon>
+        </button>
+      </div>
+    </div>
+  </form>
+</div>
+<div *ngIf="isAccountCreated" class="mt-md-4">
+  <div class="d-flex justify-content-center">
+    <div class="bg-success text-light" id="check">
+      <mat-icon id="check-icon">check</mat-icon>
+    </div>
+  </div>
+  <h3 class="text-secondary mt-4 text-center">
+    Your account created successfully! Now
+    <a routerLink="/login">Login</a>
+  </h3>
+</div>

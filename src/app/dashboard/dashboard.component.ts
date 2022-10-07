@@ -30,6 +30,14 @@ export class DashboardComponent implements OnInit {
         console.log(err);
       },
     });
+    this.resolveBill().subscribe({
+      next: (res) => {
+        this.billsCount = res;
+      },
+      error: (err) => {
+        console.error(err);
+      },
+    });
   }
 
   resolveCustomers(): Observable<any> {
@@ -37,5 +45,8 @@ export class DashboardComponent implements OnInit {
   }
   resolveProducts(): Observable<any> {
     return this.http.get('http://localhost:8001/count');
+  }
+  resolveBill(): Observable<any> {
+    return this.http.get('http://localhost:8003/count');
   }
 }

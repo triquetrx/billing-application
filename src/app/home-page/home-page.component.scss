@@ -1,0 +1,46 @@
+#landing-page-text {
+  h2 {
+    line-height: 1.85rem !important;
+    margin-bottom: 0.5rem !important;
+  }
+}
+
+.design-1 {
+  position: fixed;
+  left: 1%;
+  bottom: 15%;
+  background-image: radial-gradient(#673ab7 20%, transparent 20%),
+    radial-gradient(#673ab7 20%, transparent 20%);
+  background-position: 0 0, 10px 10px;
+  background-size: 10px 10px;
+  width: 3rem;
+  height: 10vh;
+}
+
+.design-2 {
+  position: fixed;
+  right: 1%;
+  top: 15%;
+  background-image: radial-gradient(#673ab7 20%, transparent 20%),
+    radial-gradient(#673ab7 20%, transparent 20%);
+  background-position: 0 0, 10px 10px;
+  background-size: 10px 10px;
+  width: 3rem;
+  height: 10vh;
+}
+
+.features {
+  margin: 0 !important;
+  width: 100%;
+  background-color: #673ab7;
+  color: #fff;
+  padding: 1rem;
+  .card {
+    color: #000 !important;
+    .card-title {
+      color: #673ab7 !important;
+      font-weight: 500;
+      font-size: 1.4rem;
+    }
+  }
+}

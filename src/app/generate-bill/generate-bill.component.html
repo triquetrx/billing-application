@@ -1,66 +1,166 @@
-<div class="container-fluid pb-3 mb-5">
-  <form>
+<div class="container-fluid mt-2">
+  <div class="alert alert-{{ alertType }}" *ngIf="isAlert" role="alert">
+    {{ alertMessage }}
+  </div>
+  <div>
+    <mat-form-field appearance="outline" style="width: 100%">
+      <mat-label>Search Customer</mat-label>
+      <input
+        matInput
+        placeholder="Search Customer"
+        [(ngModel)]="searchCustomer"
+        [matAutocomplete]="customers"
+        name="customerDetails"
+      />
+      <mat-autocomplete #customers>
+        <div
+          *ngIf="
+            (customerList | filter: searchCustomer).length > 0;
+            else createCustomer
+          "
+        >
+          <mat-option
+            class="text-secondary"
+            *ngFor="
+              let customer of customerList
+                | filter: searchCustomer
+                | slice: 0:2;
+              let index
+            "
+            [value]="customer.customerName"
+            (onSelectionChange)="addCustomer(customer)"
+          >
+            <h4 class="mt-3">
+              {{ customer.customerName }} | {{ customer.customerCity }}
+            </h4>
+          </mat-option>
+        </div>
+        <ng-template #createCustomer>
+          <mat-option>
+            <h4 class="mt-3">
+              No customer found; please
+              <a style="color: #673ab7" href="/customers">create one</a>
+            </h4>
+          </mat-option>
+        </ng-template>
+      </mat-autocomplete>
+    </mat-form-field>
+    <div class="billToDetails" *ngFor="let customer of billTo | slice: 0:1">
+      <div class="row">
+        <div class="col">
+          <h3>Bill To:</h3>
+        </div>
+        <div class="col text-end">
+          <h3>{{ customer.customerName }}</h3>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-5">
+          <h4>
+            Address: {{ customer.customerAddress }}, {{ customer.customerCity }}
+          </h4>
+        </div>
+        <div class="col text-end">
+          <h4 style="margin-bottom: 0.2rem">
+            Phone Number: {{ customer.customerNumber }}
+          </h4>
+          <h4>GST: {{ customer.customerGST }}</h4>
+        </div>
+      </div>
+    </div>
     <div class="row">
       <div class="col">
         <mat-form-field appearance="outline" style="width: 100%">
-          <mat-label>Product Id</mat-label>
-          <input matInput placeholder="Product Id" />
-        </mat-form-field>
-      </div>
-      <div class="col-1 mt-1">
-        <button mat-flat-button color="primary" class="me-1 p-2">
-          <mat-icon>refresh</mat-icon>
-        </button>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-md">
-        <mat-form-field appearance="outline" style="width: 100%">
-          <mat-label>Bill to</mat-label>
-          <input matInput placeholder="Bill to" />
-        </mat-form-field>
-      </div>
-      <div class="col-md">
-        <mat-form-field appearance="outline" style="width: 100%">
-          <mat-label>To Address</mat-label>
-          <input matInput placeholder="To Address" />
-        </mat-form-field>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col">
-        <mat-form-field appearance="outline" style="width: 100%">
-          <mat-label>Customer ID</mat-label>
-          <input matInput placeholder="Customer ID" />
-        </mat-form-field>
-      </div>
-      <div class="col-1 mt-1">
-        <button mat-flat-button color="primary" class="me-1 p-2">
-          <mat-icon>refresh</mat-icon>
-        </button>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-md">
-        <mat-form-field appearance="outline" style="width: 100%">
-          <mat-label>Product Name</mat-label>
-          <input matInput placeholder="Product Name" />
-        </mat-form-field>
-      </div>
-      <div class="col-md">
-        <mat-form-field appearance="outline" style="width: 100%">
-          <mat-label>Quantity</mat-label>
-          <input type="number" min="1" matInput placeholder="Quantity" />
-        </mat-form-field>
-      </div>
-      <div class="col-md">
-        <mat-form-field appearance="outline" style="width: 100%">
-          <mat-label>HSN Code</mat-label>
-          <input matInput placeholder="HSN Code" />
+          <mat-label>Search Product</mat-label>
+          <input
+            matInput
+            placeholder="Search Product"
+            [(ngModel)]="searchProduct"
+            [matAutocomplete]="products"
+            name="productDetails"
+          />
+          <mat-autocomplete #products>
+            <div
+              *ngIf="
+                (productsList | filter: searchProduct).length > 0;
+                else createProduct
+              "
+            >
+              <mat-option
+                class="text-secondary"
+                *ngFor="
+                  let product of productsList
+                    | filter: searchProduct
+                    | slice: 0:2;
+                  let index
+                "
+                [value]="product.productName"
+                (onSelectionChange)="addProduct(product)"
+              >
+                <h4 class="mt-3">
+                  {{ product.productName }} | {{ product.hsn }}
+                </h4>
+              </mat-option>
+            </div>
+            <ng-template #createProduct>
+              <mat-option>
+                <h4 class="mt-3">
+                  No customer found; please
+                  <a style="color: #673ab7" href="/products">create one</a>
+                </h4>
+              </mat-option>
+            </ng-template>
+          </mat-autocomplete>
         </mat-form-field>
       </div>
     </div>
-    <button mat-flat-button color="primary">Generate</button>
-    <button mat-flat-button class="ms-1 bg-danger text-light">Clear</button>
-  </form>
+    <table class="table" *ngIf="billProducts.length > 0">
+      <thead>
+        <tr>
+          <th>Sr No.</th>
+          <th>Product Name</th>
+          <th>HSN Code</th>
+          <th>Product Type</th>
+          <th>Quantity</th>
+          <th>Basic</th>
+          <th>GST</th>
+          <th>Total</th>
+        </tr>
+      </thead>
+      <tbody *ngFor="let billProduct of billProducts; let i = index">
+        <tr>
+          <td>{{ i + 1 }}</td>
+          <td>{{ billProduct.productName }}</td>
+          <td>{{ billProduct.hsn }}</td>
+          <td>{{ billProduct.productType }}</td>
+          <td>{{ billProduct.qty }}</td>
+          <td>₹ {{ billProduct.basic }}</td>
+          <td>{{ billProduct.gst }}%</td>
+          <td>₹ {{ billProduct.total }}</td>
+        </tr>
+      </tbody>
+      <tr>
+        <td colspan="7"><h4>Total</h4></td>
+        <td>
+          <h4>
+            <b>₹ {{ total }}</b>
+          </h4>
+        </td>
+      </tr>
+    </table>
+    <div class="mb-3">
+      <button mat-flat-button color="primary" (click)="createBill()">
+        Generate
+      </button>
+      <button
+        mat-flat-button
+        class="ms-1 bg-danger text-light"
+        (click)="reset()"
+      >
+        Clear
+      </button>
+    </div>
+    <div class="mb-5 pb-5" *ngIf="billProducts.length === 0"></div>
+    <div class="mb-5 pb-5" *ngIf="billProducts.length === 0"></div>
+  </div>
 </div>

@@ -1,1 +1,119 @@
-<p>bill-info works!</p>
+<div class="container-fluid">
+  <div
+    class="modal fade"
+    id="openBill"
+    tabindex="-1"
+    aria-labelledby="openBillLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3
+            class="modal-title"
+            style="margin-bottom: 0rem"
+            id="openBillLabel"
+          >
+            Bill No.: {{ moreBill.id }}
+          </h3>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          ></button>
+        </div>
+        <div class="modal-body">
+          <table style="width: 100%">
+            <tbody>
+              <tr>
+                <td><h4>Bill To</h4></td>
+                <td class="text-end">
+                  <h4>{{ moreBill.customerName }}</h4>
+                </td>
+              </tr>
+              <tr>
+                <td><h4>Dated:</h4></td>
+                <td class="text-end">
+                  <h4>{{ moreBill.dateCreated | date: "mediumDate" }}</h4>
+                </td>
+              </tr>
+              <tr class="text-center">
+                <td colspan="2"><h4>Product Details</h4></td>
+              </tr>
+              <tr *ngFor="let product of moreBill.products">
+                <td colspan="2">
+                  <div class="row">
+                    <div class="col">Name:</div>
+                    <div class="col text-end">{{ product.productName }}</div>
+                  </div>
+                  <div class="row">
+                    <div class="col">HSN Code:</div>
+                    <div class="col text-end">{{ product.hsn }}</div>
+                  </div>
+                  <div class="row">
+                    <div class="col">Quantity:</div>
+                    <div class="col text-end">{{ product.qty }}</div>
+                  </div>
+                  <div class="row">
+                    <div class="col">GST:</div>
+                    <div class="col text-end">{{ product.gst }}</div>
+                  </div>
+                  <div class="row">
+                    <div class="col">Amount:</div>
+                    <div class="col text-end">₹ {{ product.total }}</div>
+                  </div>
+                  <hr />
+                </td>
+              </tr>
+              <tr>
+                <td><h4>Total Amount</h4></td>
+                <td class="text-end">
+                  <h4>₹ {{ moreBill.total }}</h4>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="modal-footer">
+          <button
+            type="button"
+            mat-flat-button
+            class="bg-danger text-light me-1"
+            data-bs-dismiss="modal"
+          >
+            Close
+          </button>
+          <button type="button" mat-flat-button color="primary">Print</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="result" *ngFor="let bill of billsList">
+    <div class="card">
+      <div class="card-body row">
+        <div class="col-10">
+          <div class="card-title">
+            <h3 class="text-secondary">To: {{ bill.customerName }}</h3>
+          </div>
+          <div class="card-subtitle">
+            <h4>Bill To: {{ bill.dateCreated | date: "mediumDate" }}</h4>
+          </div>
+        </div>
+        <div class="col text-center">
+          <h3 style="color: #673ab7">₹ {{ bill.total }}</h3>
+          <button
+            mat-flat-button
+            color="primary"
+            style="width: 100%"
+            data-bs-toggle="modal"
+            data-bs-target="#openBill"
+            (click)="openBill(bill)"
+          >
+            View More
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

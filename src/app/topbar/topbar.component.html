@@ -1,27 +1,38 @@
-<nav class="navbar fixed-top navbar-expand-md navbar-light bg-light p-2 py-3">
+<nav class="navbar fixed-top navbar-expand-md navbar-light p-2 py-3">
   <div class="container-fluid">
     <img src="../../assets/biller's-icon.png" alt="biller-logo" height="28" />
     <button
       class="navbar-toggler"
       type="button"
+      (click)="toggleChange()"
       data-bs-toggle="collapse"
       data-bs-target="#navbarNav"
       aria-controls="navbarNav"
       aria-expanded="false"
       aria-label="Toggle navigation"
     >
-      <span class="navbar-toggler-icon"></span>
+      <mat-icon *ngIf="!isExpanded" style="transform: scale(1.2)"
+        >menu</mat-icon
+      >
+      <mat-icon *ngIf="isExpanded" style="transform: scale(1.2)"
+        >close</mat-icon
+      >
     </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
+    <!-- If Logged in -->
+    <div
+      class="collapse navbar-collapse"
+      *ngIf="this.cookies.get('token').length > 0"
+      id="navbarNav"
+    >
       <ul class="navbar-nav ms-auto">
         <li class="nav-item">
           <a
             class="nav-link"
-            routerLink="/home"
+            routerLink="/dashboard"
             routerLinkActive="active"
-            id="home"
+            id="dashboard"
             aria-current="page"
-            >Home</a
+            >DashBoard</a
           >
         </li>
         <li class="nav-item">
@@ -49,6 +60,42 @@
             routerLink="/products"
             routerLinkActive="active"
             >Products</a
+          >
+        </li>
+      </ul>
+    </div>
+    <!-- If not logged in then -->
+    <div
+      class="collapse navbar-collapse"
+      *ngIf="!(this.cookies.get('token').length > 0)"
+      id="navbarNav"
+    >
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item">
+          <a
+            class="nav-link"
+            id="homePage"
+            routerLink="/home"
+            routerLinkActive="active"
+            >Home</a
+          >
+        </li>
+        <li class="nav-item">
+          <a
+            class="nav-link"
+            id="login"
+            routerLink="/login"
+            routerLinkActive="active"
+            >Login</a
+          >
+        </li>
+        <li class="nav-item">
+          <a
+            class="nav-link"
+            id="help"
+            routerLink="/help"
+            routerLinkActive="active"
+            >Need Help?</a
           >
         </li>
       </ul>

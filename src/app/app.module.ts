@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, OnInit } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -21,6 +21,17 @@ import { FormsModule } from '@angular/forms';
 import { BillsMainComponent } from './bills-main/bills-main.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { GenerateBillComponent } from './generate-bill/generate-bill.component';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { LoginComponent } from './login/login.component';
+import { CookieService } from 'ngx-cookie-service';
+import { HomePageComponent } from './home-page/home-page.component';
+import { SignupComponent } from './signup/signup.component';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { SignupOneComponent } from './signup-one/signup-one.component';
+import { SignupTwoComponent } from './signup-two/signup-two.component';
+import { AuthServiceService } from './service/auth-service.service';
+import { AuthGuard } from './service/auth.guard';
+import { NotFoundPageComponent } from './not-found-page/not-found-page.component';
 
 @NgModule({
   declarations: [
@@ -33,6 +44,12 @@ import { GenerateBillComponent } from './generate-bill/generate-bill.component';
     FilterPipePipe,
     BillsMainComponent,
     DashboardComponent,
+    LoginComponent,
+    HomePageComponent,
+    SignupComponent,
+    SignupOneComponent,
+    SignupTwoComponent,
+    NotFoundPageComponent,
   ],
   imports: [
     BrowserModule,
@@ -40,6 +57,8 @@ import { GenerateBillComponent } from './generate-bill/generate-bill.component';
     BrowserAnimationsModule,
     MatFormFieldModule,
     MatIconModule,
+    MatSlideToggleModule,
+    MatAutocompleteModule,
     FormsModule,
     MatButtonModule,
     FormsModule,
@@ -51,13 +70,29 @@ import { GenerateBillComponent } from './generate-bill/generate-bill.component';
     TextFieldModule,
     RouterModule.forChild([
       { path: '', redirectTo: '/home', pathMatch: 'full' },
-      { path: 'home', component: DashboardComponent },
-      { path: 'bill', component: BillsMainComponent },
-      { path: 'products', component: ProductsComponent },
-      { path: 'customers', component: CustomersComponent },
+      { path: 'signup', component: SignupComponent },
+      { path: 'home', component: HomePageComponent },
+      { path: 'login', component: LoginComponent },
+      {
+        path: 'dashboard',
+        component: DashboardComponent,
+        canActivate: [AuthGuard],
+      },
+      { path: 'bill', component: BillsMainComponent, canActivate: [AuthGuard] },
+      {
+        path: 'products',
+        component: ProductsComponent,
+        canActivate: [AuthGuard],
+      },
+      {
+        path: 'customers',
+        component: CustomersComponent,
+        canActivate: [AuthGuard],
+      },
+      { path: '**', pathMatch: 'full', component: NotFoundPageComponent },
     ]),
   ],
-  providers: [],
+  providers: [CookieService, AuthServiceService, AuthGuard],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

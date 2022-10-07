@@ -1,0 +1,24 @@
+a {
+  color: #673ab7;
+  text-decoration: none;
+}
+
+#check {
+  border-radius: 50%;
+  font-size: larger;
+  height: 5rem;
+  width: 5rem;
+  display: flex;
+  justify-content: center;
+  #check-icon {
+    display: flex;
+    justify-content: center;
+    height: 6rem !important;
+    width: 6rem !important;
+    font-size: 5rem;
+  }
+}
+
+hr {
+  margin-top: 0.4rem;
+}
